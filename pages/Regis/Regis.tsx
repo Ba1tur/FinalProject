@@ -3,6 +3,7 @@ import s from "./Regis.module.scss";
 import MyInput from "@/components/MyInput/MyInput";
 import MyBtn from "@/components/MyBtn/MyBtn";
 import { Checkbox } from "antd";
+import Link from "next/link";
 
 interface User {
   name: string;
@@ -25,8 +26,6 @@ const Regis = () => {
     role: "",
   });
 
- 
-
   return (
     <section className={s.regis_section}>
       <div className={s.regis_section__block}>
@@ -34,32 +33,32 @@ const Regis = () => {
         <div className={s.regis_section__block_inputs}>
           <div>
             <p>Имя</p>
-            <MyInput 
-				// value={user.name} 
-				// onChange={(e) => setUser({...user , name: e.target.value})} 
-				/>
+            <MyInput
+            // value={user.name}
+            // onChange={(e) => setUser({...user , name: e.target.value})}
+            />
           </div>
           <div>
             <p>Фамилия</p>
-            <MyInput 
-				// value={user.LastName} 
-				// onChange={handleInputChange}
-				 />
+            <MyInput
+            // value={user.LastName}
+            // onChange={handleInputChange}
+            />
           </div>
           <div>
             <p>Email</p>
-            <MyInput 
-				// value={user.email} 
-				// onChange={handleInputChange}
-				/>
+            <MyInput
+            // value={user.email}
+            // onChange={handleInputChange}
+            />
           </div>
           <div>
             <p>Пароль</p>
-            <MyInput 
-				type="password"
-				// value={user.password} 
-				// onChange={handleInputChange}
-				/>
+            <MyInput
+              type="password"
+              // value={user.password}
+              // onChange={handleInputChange}
+            />
           </div>
           <div>
             <p>Повторить Пароль</p>
@@ -69,20 +68,24 @@ const Regis = () => {
             <p>Выберите Роль</p>
             <Checkbox
               checked={user.role === "student"}
-              onChange={() => setUser({...user , role: 'student'})}
+              onChange={() => setUser({ ...user, role: "student" })}
             >
               Ученик
             </Checkbox>
             <Checkbox
               checked={user.role === "teacher"}
-              onChange={() => setUser({...user , role: 'teacher'})}
+              onChange={() => setUser({ ...user, role: "teacher" })}
             >
               Учитель
             </Checkbox>
           </div>
         </div>
-        <MyBtn style={{ background: "#465EFD", color: "#FFFFFF" }}>Войти</MyBtn>
-        <MyBtn style={{ marginTop: "15px" }}>Зарегистрироваться</MyBtn>
+        <MyBtn style={{ background: "#465EFD", color: "#FFFFFF" }}>
+          Зарегистрироваться
+        </MyBtn>
+        <Link href='../Login/login' as='/login'>
+          <MyBtn style={{ marginTop: "15px" }}>Уже есть аккаунт</MyBtn>
+        </Link>
       </div>
     </section>
   );
