@@ -1,0 +1,25 @@
+.login_section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f2f5;
+  .login_section__block {
+    width: 450px;
+    height: 476px;
+    padding: 0 2% 0 2%;
+    background: #ffffff;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    h1 {
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 130%;
+      text-align: center;
+      color: #2c2d2e;
+    }
+  }
+}
