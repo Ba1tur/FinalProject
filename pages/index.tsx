@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Regis from './Regis/Regis'
 import Login from './Login/Login'
+import Main from './Main/Main'
 
 
 export default function Home() {
@@ -13,8 +14,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Regis/>
-      <Login/>
+      <Main/>
+      {/* <Regis/> */}
+      {/* <Login/> */}
     </>
   )
 }

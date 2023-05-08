@@ -1,0 +1,24 @@
+.main_section{
+	width: 100%;
+	height: 1000px;
+	background: #f0f2f5;
+	.main_section__block{
+		max-width: 1440px;
+		width: 100%;
+		height: 900px;
+		margin: 0 auto;
+		border: 1px solid black;
+		.main_section__block__about{
+			position: relative;
+			width: 100%;
+			height: 668px;
+			border: 1px solid black;
+			img{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+			}
+		}
+	}
+}

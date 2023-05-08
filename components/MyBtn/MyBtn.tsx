@@ -6,7 +6,8 @@ type Props = {
 	children: React.ReactNode;
  };
 
-const MyBtn = ({children , ...props} : Props) => {
+
+const MyBtn = ({children, ...props} : Props) => {
 	return (
 		<button {...props} className={s.mybtn}>
 			{children}
