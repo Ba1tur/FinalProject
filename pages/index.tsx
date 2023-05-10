@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Regis from './Regis/Regis'
-import Login from './Login/Login'
-import Main from './Main/Main'
+import Regis from './Regis'
+import Login from './login'
+import Main from './Main'
 
 
 export default function Home() {

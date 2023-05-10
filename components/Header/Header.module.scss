@@ -13,6 +13,10 @@
     .header__nav__logo_block {
       display: flex;
       align-items: center;
+      a{
+        display: flex;
+        align-items: center;
+      }
       .header__nav_logo {
         width: 74px;
         height: 74px;
@@ -26,11 +30,17 @@
         line-height: 120%;
         color: #2c2d2e;
       }
+      h2{
+        
+      }
+      h3{
+
+      }
     }
 
     .header__nav__block {
       width: 270px;
-      height: 45px;
+      height: 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -41,6 +51,7 @@
       line-height: 24px;
       text-align: center;
       color: #ffffff;
+      
       .header__nav_language {
         width: 35px;
         height: 35px;
