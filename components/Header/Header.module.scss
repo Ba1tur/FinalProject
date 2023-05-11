@@ -13,7 +13,7 @@
     .header__nav__logo_block {
       display: flex;
       align-items: center;
-      a{
+      a {
         display: flex;
         align-items: center;
       }
@@ -26,15 +26,27 @@
         font-family: "Lato";
         font-style: normal;
         font-weight: 700;
-        font-size: 30px;
+        font-size: 33px;
         line-height: 120%;
         color: #2c2d2e;
       }
-      h2{
-        
+      h2 {
+        font-family: "Lato";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        color: #2c2d2e;
+        margin-left: 40px;
+        cursor: pointer;
       }
-      h3{
-
+      h3 {
+        font-family: "Lato";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        margin-left: 40px;
+        color: #2c2d2e;
+        cursor: pointer;
       }
     }
 
@@ -51,7 +63,7 @@
       line-height: 24px;
       text-align: center;
       color: #ffffff;
-      
+
       .header__nav_language {
         width: 35px;
         height: 35px;

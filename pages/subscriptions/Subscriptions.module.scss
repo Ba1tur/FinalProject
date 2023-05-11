@@ -1,0 +1,107 @@
+.subscriptions_section {
+  max-width: 1440px;
+  width: 100%;
+  height: 700px;
+  margin: 0 auto;
+  margin-top: 60px;
+  h1 {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 120%;
+    margin-bottom: 30px;
+    color: #2c2d2e;
+  }
+  .subscriptions_section__block {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    .subscriptions_section__block__box {
+      position: relative;
+      width: 23.4%;
+      height: 280px;
+      padding: 0 !important;
+      transition: transform 0.3s ease-out;
+      .subscriptions_section__block__img {
+        width: 100% !important;
+        border-radius: 8px;
+        height: 150px;
+        object-fit: cover;
+        transition: filter 0.3s ease-out;
+      }
+      .subscriptions_section__block__play_btn {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        top: 40px;
+        left: 140px;
+        visibility: hidden;
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      }
+      p {
+        font-family: "Lato";
+        font-style: normal;
+        font-weight: 550;
+        font-size: 18px;
+        line-height: 120%;
+        padding: 0 2% 0 2%;
+        color: #2c2d2e;
+      }
+      button {
+        width: 200px;
+        margin-top: 40px;
+        font-family: "Lato";
+        font-style: normal;
+        font-weight: 550;
+        font-size: 18px;
+        line-height: 120%;
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      }
+    }
+  }
+  // .subscriptions_section__block__box:hover {
+  //   .subscriptions_section__block__img {
+  //     opacity: 0.9;
+  //     background-color: #1c1d1f;
+  //   }
+  //   .subscriptions_section__block__play_btn {
+  //     visibility: visible;
+  //   }
+  // }
+  // .subscriptions_section__block__box:hover {
+  //   .subscriptions_section__block__img {
+  //     position: relative;
+  //     &:before {
+  //       content: "";
+  //       position: absolute;
+  //       top: 0;
+  //       left: 0;
+  //       width: 100%;
+  //       height: 100%;
+  //       background-color: rgba(0, 0, 0, 0.5);
+  //       z-index: 1;
+  //     }
+  //   }
+  //   .subscriptions_section__block__play_btn {
+  //     visibility: visible;
+  //     z-index: 2;
+  //   }
+  // }
+  .subscriptions_section__block__box:hover {
+    transform: translateY(-10px);
+    .subscriptions_section__block__img {
+      filter: brightness(0.7);
+      transition: filter 0.3s ease-out;
+    }
+    .subscriptions_section__block__play_btn {
+      opacity: 1;
+      // transform: translateX(-10px);
+      visibility: visible;
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    }
+  }
+}
+

@@ -16,8 +16,12 @@ const Header = () => {
             <Image className={s.header__nav_logo} src={logo} alt="logo_img" />
             <h1>It-Academy</h1>
           </Link>
-          <h2>Все уроки</h2>
-          <h3>Мои подписки</h3>
+          <Link href="/">
+            <h2>Все уроки</h2>
+          </Link>
+          <Link href="/subscriptions">
+            <h3>Мои подписки</h3>
+          </Link>
         </div>
 
         <div className={s.header__nav__block}>

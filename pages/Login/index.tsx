@@ -21,7 +21,7 @@ const Login = () => {
         </div>
         <h3>Восстановить пароль</h3>
         <MyBtn style={{ background: "#465EFD", color: "#FFFFFF" }}>Войти</MyBtn>
-        <Link href='../Regis/Regis' as='/regis'>
+        <Link href='/regis' as='/regis'>
           <MyBtn style={{ marginTop: "15px" }}>Зарегистрироваться</MyBtn>
         </Link>
       </div>

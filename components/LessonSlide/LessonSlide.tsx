@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import s from "./LessonSlide.module.scss";
 import reactLogo from "../../public/reactpng.png";
 
@@ -7,19 +7,34 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { Navigation } from "swiper";
+
+import SwiperCore, { Navigation, Autoplay } from "swiper";
 import Image from "next/image";
 import { Lesson } from "@/constants/lessons";
 import { Button } from "antd";
+import "swiper/swiper.min.css";
+
+SwiperCore.use([Autoplay]);
 
 type Props = {
   lessons: Lesson[];
 };
 
 const LessonSlide = ({ lessons }: Props) => {
+ 
+
   return (
     <div className={s.lessons_slide}>
       <Swiper
+        loop
+        speed={2500}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
         navigation={true}
         slidesPerView={4}
         spaceBetween={70}

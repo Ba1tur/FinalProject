@@ -83,7 +83,7 @@ const Regis = () => {
         <MyBtn style={{ background: "#465EFD", color: "#FFFFFF" }}>
           Зарегистрироваться
         </MyBtn>
-        <Link href='../Login/Login' as='/login'>
+        <Link href="/login" as="/login">
           <MyBtn style={{ marginTop: "15px" }}>Уже есть аккаунт</MyBtn>
         </Link>
       </div>
@@ -91,4 +91,4 @@ const Regis = () => {
   );
 };
 
-export default Regis; 
+export default Regis;
