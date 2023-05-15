@@ -30,16 +30,37 @@
         line-height: 120%;
         color: #2c2d2e;
       }
-      h2 {
+      .link {
         font-family: "Lato";
         font-style: normal;
         font-weight: 700;
         font-size: 28px;
         color: #2c2d2e;
+        transition: 0.3s;
         margin-left: 40px;
         cursor: pointer;
       }
-      h3 {
+      .link_active {
+        position: relative;
+        font-family: "Lato";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        transition: 0.3s;
+        color: #4891FF;
+        margin-left: 40px;
+        cursor: pointer;
+      }
+      .link_active::before{
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        transition: 0.3s;
+        top: 44px;
+        border: 4px solid #4891FF;
+      }
+      .link {
         font-family: "Lato";
         font-style: normal;
         font-weight: 700;
@@ -48,6 +69,7 @@
         color: #2c2d2e;
         cursor: pointer;
       }
+      
     }
 
     .header__nav__block {

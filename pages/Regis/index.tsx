@@ -14,7 +14,7 @@ interface User {
   role: string;
 }
 
-const Regis = () => {
+const Regis: React.FC = () => {
   // const [role , setRole] = useState("");
 
   const [user, setUser] = useState<User>({
@@ -25,6 +25,21 @@ const Regis = () => {
     repeatPassword: "",
     role: "",
   });
+
+  const styles: { [key: string]: React.CSSProperties } = {
+    blueBtn: {
+      background: "#465EFD" ,
+      color: "#FFFFFF",
+    },
+    whiteBtn: {
+      marginTop: "15px" ,
+    }
+  };
+
+  // const blueBtn = {
+  //   background: "#465EFD",
+  //   color: "#FFFFFF",
+  // }
 
   return (
     <section className={s.regis_section}>
@@ -39,7 +54,7 @@ const Regis = () => {
             />
           </div>
           <div>
-            <p>Фамилия</p>
+            <p style={{background:'red'}}>Фамилия</p>
             <MyInput
             // value={user.LastName}
             // onChange={handleInputChange}
@@ -80,7 +95,7 @@ const Regis = () => {
             </Checkbox>
           </div>
         </div>
-        <MyBtn style={{ background: "#465EFD", color: "#FFFFFF" }}>
+        <MyBtn style={{background: "#465EFD" , color: "#FFFFFF"}}> 
           Зарегистрироваться
         </MyBtn>
         <Link href="/login" as="/login">
