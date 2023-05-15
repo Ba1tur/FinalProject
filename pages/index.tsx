@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Regis from './regis'
-import Login from './login'
 import Main from './main'
 
 
@@ -15,8 +13,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main/>
-      {/* <Regis/> */}
-      {/* <Login/> */}
     </>
   )
 }
