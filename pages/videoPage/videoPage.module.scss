@@ -4,12 +4,8 @@
 	height: 700px;
 	margin: 0 auto;
 	border: 1px solid black;
-	.video_page_section__block{
-		max-width: 1100px;
+	video{
 		width: 100%;
-		video{
-			width: 100%;
-			height: 100%;
-		}
+		height: 400px;
 	}
 }

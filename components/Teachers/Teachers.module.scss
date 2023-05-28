@@ -1,0 +1,95 @@
+.team_lead {
+  //   background-color: rgb(255, 255, 255);
+  background-color: var(--background-color);
+  transition: background-color 200ms linear;
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  .container {
+    width: 100%;
+    padding-top: 110px;
+    .heading {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      gap: 39px;
+      margin-bottom: 103px;
+      flex-wrap: wrap;
+      h2 {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 67px;
+        //   color: #000000;
+        color: var(--font-color);
+        transition: color 500ms linear;
+      }
+    }
+    @media (max-width: 700px) {
+      .heading {
+        justify-content: center;
+        text-align: center;
+
+        h2 {
+          font-weight: 700;
+          font-size: 30px;
+          line-height: 38px;
+          //  color: #000000;
+          color: var(--font-color);
+          transition: color 500ms linear;
+        }
+      }
+
+      .users_cards {
+        flex-direction: column;
+      }
+    }
+    .users_cards {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1270px;
+      margin: 0 auto;
+
+      .user_card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .username {
+          margin: 40px 0 15px;
+          font-weight: 500;
+          font-size: 24px;
+          line-height: 34px;
+         //  color: #000000;
+          color: var(--font-color);
+          transition: color 500ms linear;
+        }
+        .spec {
+          font-weight: 400;
+          font-size: 18px;
+          opacity: 0.8;
+          line-height: 26px;
+          margin-bottom: 30px;
+         //  color: #000000;
+          color: var(--font-color);
+          transition: color 500ms linear;
+        }
+        .btn {
+          padding: 10px 30px;
+          border-radius: 50px;
+          border: 1px solid #000000;
+          background: transparent;
+         //  color: #000000;
+          color: var(--font-color);
+          transition: color 500ms linear;
+			 border: 1px solid var(--border-1px-solid);
+          font-size: 16px;
+          line-height: 24px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

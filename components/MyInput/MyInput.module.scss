@@ -1,6 +1,6 @@
 .myinput {
-  width: 100%;
-  height: 46px;
+  width: 100% !important;
+  height: 41px;
   background: #ffffff;
   border: 2px solid rgba(0, 16, 61, 0.12);
   transition: 0.3s;
@@ -10,7 +10,7 @@
   font-style: normal;
   font-weight: 400;
   padding-left: 10px;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 24px;
   color: #919399;
 }

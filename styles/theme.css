@@ -1,0 +1,19 @@
+:root {
+	--background-color-theme1: #ffffff;
+	--background-theme1: #f0f2f5;
+	--font-color-theme1: #101010;
+	--border-1px-solid-theme1: #000000;
+ 
+	--background-color-theme2: #1b1b1b;
+	--border-1px-solid-theme2:  #ffffff;
+	--background-theme2: #343434;
+	--font-color-theme2: #ffffff;
+ 
+	--font-size-title: 16px;
+	--font-size-subtitle: 12px;
+ 
+	--background-color: var(--background-color-theme1);
+	--font-color: var(--font-color-theme1);
+	--background: var(--background-color-theme1);
+	--border-1px-solid: var(--border-1px-solid-theme1)
+ }

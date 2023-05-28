@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import s from "./LessonSlide.module.scss";
 import reactLogo from "../../public/reactpng.png";
 
@@ -27,7 +27,7 @@ const LessonSlide = ({ lessons }: Props) => {
     <div className={s.lessons_slide}>
       <Swiper
         loop
-        speed={2500}
+        speed={2000}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,

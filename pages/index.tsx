@@ -1,7 +1,28 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Main from './Main'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { useGLTF, Stage, OrbitControls } from '@react-three/drei'
+import { useState, useEffect } from 'react'
+import Main from './main'
 
+// interface ModelProps {
+//   scale: number;
+// }
+
+// function Model(props: ModelProps) {
+//   const { scene } = useGLTF('/earth.glb')
+//   const [positionY, setPositionY] = useState(0)
+
+//   useFrame(() => {
+//     // Изменяем позицию модели в каждом кадре для создания анимации
+//     const time = performance.now() / 1000 // Получаем текущее время
+//     const speed = 0.5 // Скорость анимации поднятия/опускания
+//     const height = 0.2 // Высота подъема модели
+//     const yPos = Math.sin(time * speed) * height // Вычисляем новую позицию Y в зависимости от времени
+//     setPositionY(yPos)
+//   })
+
+//   return <primitive object={scene} position={[0, positionY, 0]} {...props} />
+// }
 
 export default function Home() {
   return (
@@ -12,7 +33,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Main/>
+     <Main/>
+     
     </>
   )
 }
