@@ -1,0 +1,42 @@
+.subscriptions_section__block__box {
+  position: relative;
+  width: 23.4%;
+  height: 280px;
+  padding: 0 !important;
+  transition: transform 0.3s ease-out;
+  .subscriptions_section__block__img {
+    width: 100% !important;
+    border-radius: 8px;
+    height: 150px;
+    object-fit: cover;
+    transition: filter 0.3s ease-out;
+  }
+  .subscriptions_section__block__play_btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50px;
+    left: 147px;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  p {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 550;
+    font-size: 18px;
+    line-height: 120%;
+    padding: 0 2% 0 2%;
+    color: #2c2d2e;
+  }
+  button {
+    width: 200px;
+    margin-top: 40px;
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 550;
+    font-size: 18px;
+    line-height: 120%;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+}

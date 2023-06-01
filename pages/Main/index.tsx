@@ -5,13 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Teachers from "@/components/Teachers/Teachers";
 
-const Main = () => {
-  const variants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0 },
-  };
 
-  const containerVariants = {
+ export const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -23,13 +18,20 @@ const Main = () => {
     },
   };
 
-  const textVariants = {
+   export const textVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
     },
   };
+
+const Main = () => {
+  const variants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0 },
+  };
+
 
   const imageVariants = {
     hidden: { opacity: 0, x: 100 },

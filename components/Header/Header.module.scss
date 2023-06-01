@@ -1,9 +1,11 @@
 .header {
   width: 100%;
+  top: 0;
+  left: 0;
   height: 75px;
   // background: #ffff;
   background-color: var(--background);
-  transition: background-color 200ms linear;
+  transition: background-color 500ms linear;
   // border-bottom: 1px solid #d1d7dc;
   .header__nav {
     max-width: 1440px;
@@ -136,4 +138,8 @@
       }
     }
   }
+}
+
+.hidden {
+  top: -100px; /* Adjust this value based on your header height */
 }

@@ -13,12 +13,12 @@ function Model(props: ModelProps) {
   return <primitive object={scene} {...props} />;
 }
 
-const Earth = () => {
+const Earth = React.memo(({ showEarth }: { showEarth: boolean }) => {
   return (
     <Canvas
       dpr={[1, 2]}
       camera={{ fov: 1 }}
-      style={{ width: "1600px", height: "1600px", position: 'absolute' , top: '-520px'}}
+      style={{ width: "1700px", height: "1700px", position: 'absolute' , top: '-520px'}}
     >
       <Stage>
         <Model scale={0.01} />
@@ -32,6 +32,6 @@ const Earth = () => {
       />
     </Canvas>
   );
-};
+}, (prevProps, nextProps) => prevProps.showEarth === nextProps.showEarth);
 
 export default Earth;

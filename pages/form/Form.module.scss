@@ -2,56 +2,11 @@
   max-width: 1440px;
   width: 100%;
   height: 100vh;
-  margin: 0 auto;
-  // display: flex;
+  margin: 120px auto;
   align-items: center;
   justify-content: center;
   background: #f0f2f5;
-  // .login_section__block {
-  //   width: 450px;
-  //   height: 466px;
-
-  //   padding: 0 2% 0 2%;
-  //   background: #ffffff;
-  //   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
-  //   border-radius: 16px;
-  //   h1 {
-  //     font-family: "Lato";
-  //     font-style: normal;
-  //     font-weight: 600;
-  //     font-size: 30px;
-  //     margin-top: 20px;
-  //     line-height: 130%;
-  //     text-align: center;
-  //     color: #2c2d2e;
-  //   }
-  //   .login_section__block__inputs {
-	// 	display: flex;
-	// 	flex-direction: column;
-	// 	margin-top: 25px;
-	// 	gap: 25px;
-  //     p {
-  //       font-family: "Lato";
-  //       font-style: normal;
-  //       font-weight: 400;
-  //       font-size: 18px;
-  //       line-height: 24px;
-  //       color: #919399;
-  //     }
-  //   }
-  //   h3 {
-  //     font-family: "Lato";
-  //     font-style: normal;
-  //     font-weight: 400;
-  //     font-size: 14px;
-  //     line-height: 20px;
-	// 	margin: 13px 0 32px 0;
-  //     color: #2c2d2e;
-	// 	cursor: pointer;
-  //   }
-  // }
 }
-
 
 $white: #e9e9e9;
 $gray: #333;
@@ -59,8 +14,7 @@ $blue: #0367a6;
 $lightblue: #008997;
 $button-radius: 0.7rem;
 $max-width: 1440px;
-$max-height: 680px;
-
+$max-height: 730px;
 
 .form__title {
   font-weight: 300;
@@ -73,7 +27,7 @@ $max-height: 680px;
   margin-top: 20px;
   line-height: 130%;
   text-align: center;
-  color: #2c2d2e; 
+  color: #2c2d2e;
 }
 
 .link {
@@ -101,11 +55,45 @@ $max-height: 680px;
   position: absolute;
   top: 0;
   transition: all 0.6s ease-in-out;
-  span{
+  span {
     padding-right: 180px;
     padding-top: 10px;
     color: red;
   }
+}
+
+.container__form__btn {
+  width: 169px;
+  height: 44px;
+  background: #ffffff;
+  transform: scale(1) !important;
+  border: 1px solid rgba(0, 16, 61, 0.12);
+  border-radius: 10px 0px 0px 10px;
+}
+
+.container__form__btn_active{
+  width: 169px;
+  height: 44px;
+  background: #ffffff;
+  transform: scale(1) !important;
+  border: 1px solid #465EFD;
+  transition: 0.4s;
+}
+
+.container__form__btn_active:nth-child(1){
+  border-radius: 10px 0px 0px 10px;
+}
+
+.container__form__btn_active:nth-child(2){
+  border-radius: 0px 10px 10px 0px;
+}
+
+.container__form__btn:nth-child(1){
+  border-radius: 10px 0px 0px 10px;
+}
+
+.container__form__btn:nth-child(2){
+  border-radius: 0px 10px 10px 0px;
 }
 
 .container--signin {
@@ -220,9 +208,9 @@ $max-height: 680px;
   }
 }
 
-.btn:nth-child(2){
+.btn:nth-child(2) {
   background-color: red !important;
-  top: 270px;
+  top: 300px;
 }
 
 .form > .btn {
@@ -238,7 +226,7 @@ $max-height: 680px;
   padding: 0 3rem;
   height: 100%;
   text-align: center;
-  p{
+  p {
     font-family: "Lato";
     font-style: normal;
     font-weight: 400;
@@ -269,4 +257,3 @@ $max-height: 680px;
     z-index: 5;
   }
 }
-

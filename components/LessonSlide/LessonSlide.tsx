@@ -24,26 +24,9 @@ const LessonSlide = ({ lessons }: Props) => {
  
 
   return (
-    <div className={s.lessons_slide}>
-      <Swiper
-        loop
-        speed={2000}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        slidesPerView={4}
-        spaceBetween={70}
-        modules={[Navigation]}
-        className="mySwiper"
-      >
-        {lessons.map((item) => {
+    <>
+     {lessons.map((item) => {
           return (
-            <SwiperSlide key={item.id}>
               <div className={s.container}>
                 <div className={s.card}>
                   <div className={`${s.face} ${s.front}`}>
@@ -64,11 +47,54 @@ const LessonSlide = ({ lessons }: Props) => {
                   </div>
                 </div>
               </div>
-            </SwiperSlide>
           );
         })}
-      </Swiper>
-    </div>
+    </>
+    // <div className={s.lessons_slide}>
+    //   <Swiper
+    //     loop
+    //     speed={2000}
+    //     autoplay={{
+    //       delay: 2500,
+    //       disableOnInteraction: false,
+    //     }}
+    //     pagination={{
+    //       clickable: true,
+    //     }}
+    //     navigation={true}
+    //     slidesPerView={4}
+    //     spaceBetween={70}
+    //     modules={[Navigation]}
+    //     className="mySwiper"
+    //   >
+    //     {lessons.map((item) => {
+    //       return (
+    //         <SwiperSlide key={item.id}>
+    //           <div className={s.container}>
+    //             <div className={s.card}>
+    //               <div className={`${s.face} ${s.front}`}>
+    //                 <div className={s.content}>
+    //                   <Image
+    //                     width={300}
+    //                     height={200}
+    //                     src={item.img}
+    //                     alt="react_img"
+    //                   />
+    //                 </div>
+    //               </div>
+    //               <div className={`${s.face} ${s.back}`}>
+    //                 <div className={s.content}>
+    //                   <p>{item.title}</p>
+    //                   <Button>Перейти на урок</Button>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </SwiperSlide>
+    //       );
+    //     })}
+    //   </Swiper>
+    // </div>
   );
 };
 
