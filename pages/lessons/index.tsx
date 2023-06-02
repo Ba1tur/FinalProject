@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import s from "./Lessons.module.scss";
 import Image from "next/image";
 import mainImg from "../../public/Hero.png";
@@ -7,9 +7,23 @@ import { lessons } from "@/constants/lessons";
 import { motion } from "framer-motion";
 import { subscriptions } from "@/constants/subscriptions";
 import { Button, Card } from "antd";
-import playBtn from '../../public/play.svg'
+import playBtn from "../../public/play.svg";
+import axios from "axios";
 
 const Lessons = () => {
+
+
+  useEffect(() => {
+    axios
+      .get("https://localhost:7090/Course/getAllCourses")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <main className={s.main_section}>
       <div className={s.main_section__block}>

@@ -7,7 +7,7 @@ import { subscriptions } from "@/constants/subscriptions";
 import playBtn from "../../public/play.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { motion } from "framer-motion";
 interface subscriptions {
   id: number;
   img: string;
@@ -19,14 +19,20 @@ const Subscriptions = () => {
 
   return (
     <section className={s.subscriptions_section}>
-      <h1>Все подписки</h1>
+      <motion.h1
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
+      >
+        Все подписки
+      </motion.h1>
       <div className={s.subscriptions_section__block}>
         {subscriptions.map((card) => {
           return (
             <Card
-            onClick={() => router.push('/videoPage')} 
-            key={card.id} 
-            className={s.subscriptions_section__block__box}>
+              onClick={() => router.push("/videoPage")}
+              key={card.id}
+              className={s.subscriptions_section__block__box}
+            >
               <Image
                 className={s.subscriptions_section__block__img}
                 width={320}

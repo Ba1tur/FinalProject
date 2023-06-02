@@ -4,34 +4,33 @@ import Hero from "../../public/Hero.png";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Teachers from "@/components/Teachers/Teachers";
+import Statistics from "@/components/Statistics/Statistics";
 
-
- export const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.3,
-        when: "beforeChildren",
-        staggerChildren: 0.2,
-      },
+export const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.3,
+      when: "beforeChildren",
+      staggerChildren: 0.2,
     },
-  };
+  },
+};
 
-   export const textVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
+export const textVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 const Main = () => {
   const variants = {
     hidden: { opacity: 0, y: 15 },
     visible: { opacity: 1, y: 0 },
   };
-
 
   const imageVariants = {
     hidden: { opacity: 0, x: 100 },
@@ -74,7 +73,12 @@ const Main = () => {
           <Image src={Hero} alt="hero_img" />
         </motion.div>
       </div>
-      <Teachers />
+      <div>
+        <Teachers />
+      </div>
+      <div>
+        <Statistics/>
+      </div>
     </section>
   );
 };

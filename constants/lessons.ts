@@ -8,7 +8,7 @@ export const lessons: Lesson[] = [
   {
     id: 1,
     img: "/../public/reactpng.png",
-    title: "Групппа и тюд айцайцайцайцайца",
+    title: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi!",
   },
   {
     id: 2,

@@ -37,6 +37,35 @@ a{
 }
 
 
+.ant-checkbox-inner{
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.ant-list-item-meta-description{
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px !important;
+  color: var(--font-color);
+  transition: color 500ms linear;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #6d6d6d; 
+}
 
 button,a{
   cursor: pointer;

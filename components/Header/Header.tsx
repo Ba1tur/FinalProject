@@ -1,12 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import s from "./Header.module.scss";
 import logo from "../../public/logo.png";
 import language from "../../public/language.svg";
 import Image from "next/image";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import MyBtn from "../MyBtn/MyBtn";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import {UserOutlined} from '@ant-design/icons'
+
+
+interface headerDowns {
+  position: string,
+  top: number,
+  left: number,
+  right: number,
+  zIndex: number,
+  transition: string,
+  transform: any,
+}
 
 const Header = () => {
   // const router = useRouter();
@@ -14,7 +26,8 @@ const Header = () => {
   // const isHomepage = router.pathname.startsWith('/')
   // const isSubscriptionsPage = router.pathname.startsWith('/subscriptions')
 
-  const [theme, setTheme] = useState("");
+  const [theme, setTheme] = useState<string>("");
+  const [item, setItem] = useState(false);
 
   const toggleTheme = () => {
     const newTheme = theme === "theme1" ? "theme2" : "theme1";
@@ -24,10 +37,18 @@ const Header = () => {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
+
     if (storedTheme) {
       setTheme(storedTheme);
     }
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setItem(true);
+    }
+  }, [item]);
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -76,7 +97,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
-  const headerDown = {
+  const headerDown: CSSProperties = {
     position: "fixed",
     top: 0,
     left: 0,
@@ -86,6 +107,8 @@ const Header = () => {
     transform: isHeaderVisible ? "translateY(0)" : "translateY(-100%)",
   };
 
+  console.log(item);
+
   return (
     <header style={headerDown} className={s.header}>
       <nav className={s.header__nav}>
@@ -94,36 +117,51 @@ const Header = () => {
             <Image className={s.header__nav_logo} src={logo} alt="logo_img" />
             <h1>It-Academy</h1>
           </Link>
-          <Link href="/lessons">
-            <h2 className={pathname === "/lessons" ? s.link_active : s.link}>
-              Все уроки
-            </h2>
-          </Link>
-          <Link href="/subscriptions">
-            <h3
-              className={pathname === "/subscriptions" ? s.link_active : s.link}
-            >
-              Мои подписки
-            </h3>
-          </Link>
+          {item ? (
+            <div style={{ display: "flex" }}>
+              <Link href="/lessons">
+                <h2
+                  className={pathname === "/lessons" ? s.link_active : s.link}
+                >
+                  Все уроки
+                </h2>
+              </Link>
+              <Link href="/subscriptions">
+                <h3
+                  className={
+                    pathname === "/subscriptions" ? s.link_active : s.link
+                  }
+                >
+                  Мои подписки
+                </h3>
+              </Link>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className={s.header__nav__block}>
-          {/* <Image
-            className={s.header__nav_language}
-            src={language}
-            alt="language_icon"
-          /> */}
           <input
             type="checkbox"
             onClick={toggleTheme}
             checked={theme === "theme2"}
             className={s.header__nav__block_theme_btn}
           />
+          {item ? 
+          (
+            <Tooltip  placement="bottom" title='User: User'>
+                 <UserOutlined style={{color: 'black' , fontSize: '30px' , cursor: 'pointer'}} />
+          </Tooltip>
+          )
+        : 
+        (
           <Link href="/form">
             <Button type="primary" style={{ width: "200px", height: "45px" }}>
               Вход и регистрация
             </Button>
-          </Link>
+          </Link> 
+        )
+        }
         </div>
       </nav>
     </header>
