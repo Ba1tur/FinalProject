@@ -51,8 +51,31 @@ a{
   transition: color 500ms linear;
 }
 
+textarea{
+  resize: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
+}
+
+.ant-input{
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 10px;
+  font-size: 15px;
+  line-height: 24px;
+  color: #919399;
+}
+
+.ant-input::placeholder{
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  color: #919399;
 }
 
 ::-webkit-scrollbar-track {

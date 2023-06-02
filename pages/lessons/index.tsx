@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Lessons.module.scss";
 import Image from "next/image";
 import mainImg from "../../public/Hero.png";
@@ -12,17 +12,22 @@ import axios from "axios";
 
 const Lessons = () => {
 
+  const [lessons , setLessons] = useState([])
 
   useEffect(() => {
     axios
       .get("https://localhost:7090/Course/getAllCourses")
       .then((res) => {
-        console.log(res);
+        setLessons(res.data.courses.courses)
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  console.log(lessons);
+  
 
   return (
     <main className={s.main_section}>
@@ -35,18 +40,18 @@ const Lessons = () => {
           Все Курсы
         </motion.h1>
         <div className={s.main_section__block__about}>
-          {subscriptions.map((card) => {
+          {lessons.map((item) => {
             return (
               <Card
                 // onClick={() => router.push("/videoPage")}
-                key={card.id}
+                key={item.id}
                 className={s.main_section__block__box}
               >
                 <Image
                   className={s.main_section__block__img}
                   width={320}
                   height={150}
-                  src={card.img}
+                  src='/reactpng.png'
                   alt="react_logo"
                 />
                 <Image
@@ -54,7 +59,8 @@ const Lessons = () => {
                   src={playBtn}
                   alt="play_btn"
                 />
-                <p>{card.tilte}</p>
+                <p>{item.title}</p>
+                <p>{item.description}</p>
                 <Button danger>Отписаться</Button>
               </Card>
             );

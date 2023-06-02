@@ -107,8 +107,6 @@ const Header = () => {
     transform: isHeaderVisible ? "translateY(0)" : "translateY(-100%)",
   };
 
-  console.log(item);
-
   return (
     <header style={headerDown} className={s.header}>
       <nav className={s.header__nav}>

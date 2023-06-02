@@ -118,10 +118,10 @@ const Form: React.FC = () => {
   const loginUsers = async () => {
     if (isChecked === true) {
       await axios
-        .post("https://localhost:7090/StudentAccount/authorize/", postStudent)
+        .post("https://localhost:7090/Account/authorize", postLoginUser)
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data.jwtToken));
-          router.push("/lessons");
+          // router.push("/lessons");
           console.log(res);
         })
         .catch((err) => {
@@ -129,10 +129,10 @@ const Form: React.FC = () => {
         });
     } else {
       await axios
-        .post("https://localhost:7090/Account/authorize/", postLoginUser)
+        .post("https://localhost:7090/StudentAccount/authorize", postStudent)
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data.jwtToken));
-          router.push("/lessons");
+          // router.push("/lessons");
           console.log(res);
         })
         .catch((err) => {
@@ -198,7 +198,7 @@ const Form: React.FC = () => {
       >
         {/* Sign Up */}
         <div className={`${s.container__form} ${s["container--signup"]}`}>
-          <form  className={s.form} id="form1" noValidate>
+          <form className={s.form} id="form1" noValidate>
             <h2 className={s.form__title}>Зарегистрироваться</h2>
             <div>
               <button
@@ -347,12 +347,7 @@ const Form: React.FC = () => {
           </form>
         </div>
         <div className={`${s.container__form} ${s["container--signin"]}`}>
-          <form
-            
-            className={s.form}
-            id="form2"
-            onSubmit={handleFormSubmit}
-          >
+          <form className={s.form} id="form2" onSubmit={handleFormSubmit}>
             <h2 className={s.form__title}>Войти</h2>
             {isChecked ? (
               <>
@@ -415,9 +410,9 @@ const Form: React.FC = () => {
             )}
             <div className={s.form_checkbox}>
               <Checkbox checked={isChecked} onChange={handleCheckbox1Change} />
-              <h6> Ученик</h6>
+              <h6> Учетиль</h6>
               <Checkbox checked={!isChecked} onChange={handleCheckbox2Change} />
-              <h6> Учитель</h6>
+              <h6> Ученик</h6>
             </div>
             <a href="#" className={s.link} onClick={showModal}>
               Забыли свой пароль ?
