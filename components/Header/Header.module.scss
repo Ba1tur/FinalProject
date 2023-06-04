@@ -65,11 +65,11 @@
         content: "";
         position: absolute;
         width: 100%;
-        height: 1px;
+        // height: 1px;
         transition: 0.3s;
         top: 44px;
         // border: 4px solid #4891ff;
-        border: 4px solid var(--border-1px-solid);
+        border: 3px solid var(--border-1px-solid);
       }
       .link {
         font-family: "Lato";
@@ -138,6 +138,11 @@
       }
     }
   }
+}
+
+.profile_name{
+  font-size: 18px;
+  font-family: "Lato" , sans-serif;
 }
 
 .hidden {

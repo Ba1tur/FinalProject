@@ -1,24 +1,41 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import s from "./Mentor.module.scss";
 import MyInput from "@/components/MyInput/MyInput";
 import { Button, Input } from "antd";
-import { createCourse } from "@/redux/reducers/createCourse";
 import MyBtn from "@/components/MyBtn/MyBtn";
-// import { createCourse } from "@/store/courseSlice";
+import { useDispatch } from "react-redux";
+import { createCourse } from "@/redux/reducers/createCourse";
 
 const { TextArea } = Input;
 
 const Mentor = () => {
+  const [user, setUser] = useState<any>();
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+    }
+  }, []);
+
   const [courseData, setCourseData] = useState({
     title: "",
     description: "",
-	 mentorId: 1002,
+    mentorId: null,
   });
 
-  const loading = useSelector((state) => state.course.loading);
-  const error = useSelector((state) => state.course.error);
-  const dispatch = useDispatch();
+  useEffect(() => {
+    setCourseData((prevData) => ({
+      ...prevData,
+      mentorId: user?.id,
+    }));
+  }, [user]);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,10 +44,10 @@ const Mentor = () => {
       [name]: value,
     }));
   };
+
+
   
-  const handleCreateCourse = () => {
-    dispatch(createCourse(courseData));
-  };
+
 
   return (
     <div className={s.mentor_section}>
@@ -49,10 +66,9 @@ const Mentor = () => {
           value={courseData.description}
           onChange={handleInputChange}
         />
-        <Button  onClick={handleCreateCourse} disabled={loading}>
+        <Button onClick={() => postcreateCource()}>
           Создать
         </Button>
-        {error && <p>{error}</p>}
       </div>
     </div>
   );

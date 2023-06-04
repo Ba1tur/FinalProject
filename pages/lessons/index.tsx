@@ -27,6 +27,9 @@ const Lessons = () => {
   }, []);
 
   console.log(lessons);
+
+
+  
   
 
   return (
@@ -61,7 +64,7 @@ const Lessons = () => {
                 />
                 <p>{item.title}</p>
                 <p>{item.description}</p>
-                <Button danger>Отписаться</Button>
+                <Button >Подписаться</Button>
               </Card>
             );
           })}

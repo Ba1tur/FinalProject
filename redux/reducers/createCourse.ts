@@ -11,17 +11,16 @@ export const createCourse = createAsyncThunk(
   'course/create',
   async (courseData: CourseData, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('No token found');
-      }
-
-      const response = await axios.post('https://localhost:7090/Course/Create', courseData, {
+      let config = {
         headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem("token") as string)
+        }
+      }
+      const response = await axios.post(
+        'https://localhost:7090/Course/Create',
+        courseData,
+        config
+      );
 
       return response.data;
     } catch (error) {

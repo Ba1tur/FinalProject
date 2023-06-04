@@ -3,31 +3,28 @@ import s from "./Header.module.scss";
 import logo from "../../public/logo.png";
 import language from "../../public/language.svg";
 import Image from "next/image";
-import { Button, Tooltip } from "antd";
+import { Button, Dropdown, MenuProps, Tooltip } from "antd";
 import MyBtn from "../MyBtn/MyBtn";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {UserOutlined} from '@ant-design/icons'
-
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 
 interface headerDowns {
-  position: string,
-  top: number,
-  left: number,
-  right: number,
-  zIndex: number,
-  transition: string,
-  transform: any,
+  position: string;
+  top: number;
+  left: number;
+  right: number;
+  zIndex: number;
+  transition: string;
+  transform: any;
 }
 
 const Header = () => {
-  // const router = useRouter();
-
-  // const isHomepage = router.pathname.startsWith('/')
-  // const isSubscriptionsPage = router.pathname.startsWith('/subscriptions')
+  const router = useRouter();
 
   const [theme, setTheme] = useState<string>("");
   const [item, setItem] = useState(false);
+  const [user, setUser] = useState<any>();
 
   const toggleTheme = () => {
     const newTheme = theme === "theme1" ? "theme2" : "theme1";
@@ -44,11 +41,20 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("user");
     if (token) {
       setItem(true);
     }
   }, [item]);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+    }
+  }, []);
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -97,6 +103,20 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === "user") {
+        const token = localStorage.getItem("user");
+        if (token) {
+          setItem(true);
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   const headerDown: CSSProperties = {
     position: "fixed",
     top: 0,
@@ -106,6 +126,33 @@ const Header = () => {
     transition: "transform 0.3s ease-out",
     transform: isHeaderVisible ? "translateY(0)" : "translateY(-100%)",
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token")
+    location.reload();
+    router.push("/");
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <div>
+          {user && user.userName && (
+            <h4 className={s.profile_name}>Имя: {user.userName}</h4>
+          )}
+          <Button
+            onClick={handleLogout}
+            style={{ width: "130px", marginTop: "20px" }}
+            icon={<LogoutOutlined />}
+          >
+            Выйти
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <header style={headerDown} className={s.header}>
@@ -145,21 +192,22 @@ const Header = () => {
             checked={theme === "theme2"}
             className={s.header__nav__block_theme_btn}
           />
-          {item ? 
-          (
-            <Tooltip  placement="bottom" title='User: User'>
-                 <UserOutlined style={{color: 'black' , fontSize: '30px' , cursor: 'pointer'}} />
-          </Tooltip>
-          )
-        : 
-        (
-          <Link href="/form">
-            <Button type="primary" style={{ width: "200px", height: "45px" }}>
-              Вход и регистрация
-            </Button>
-          </Link> 
-        )
-        }
+          {item ? (
+            <Dropdown menu={{ items }} placement="bottom">
+              <UserOutlined
+                style={{ color: "black", fontSize: "30px", cursor: "pointer" }}
+              />
+            </Dropdown>
+          ) : (
+            <Link href="/form">
+              <Button
+                type="primary"
+                style={{ width: "200px", height: "45px" }}
+              >
+                Вход и регистрация
+              </Button>
+            </Link>
+          )}
         </div>
       </nav>
     </header>

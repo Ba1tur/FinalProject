@@ -20,9 +20,9 @@ interface MentorsState {
   loading: boolean;
 }
 
-export const getMentors = createAsyncThunk(
-  "mentors/getMentors",
-  async (_, { rejectedWithValue }) => {
+export const getSubscriptions = createAsyncThunk(
+  "subscriptions/getSubscriptions",
+  async (id: number, { rejectedWithValue }) => {
     try {
       let config = {
         headers: {
@@ -31,7 +31,7 @@ export const getMentors = createAsyncThunk(
         },
       };
       const res = await axios.get(
-        "https://localhost:7090/Admin/getAllMentors",
+        `https://localhost:7090/Course/getStudentCourses/${id}`,
         config
       );
 
@@ -39,7 +39,7 @@ export const getMentors = createAsyncThunk(
       if (res.statusText !== "OK") {
         throw new Error("Произошла ошибка");
       }
-      return res.data.data.mentors as Mentor[];
+      return res.data.data.courses as any;
     } catch (err) {
       console.log(rejectedWithValue(err.message));
       throw err;
@@ -53,23 +53,23 @@ const initialState: MentorsState = {
   loading: false,
 };
 
-const mentorsSlice = createSlice({
-  name: "mentors",
+const subscriptionSlice = createSlice({
+  name: "subscription",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getMentors.pending, (state) => {
+      .addCase(getSubscriptions.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
-      .addCase(getMentors.rejected, (state) => {
+      .addCase(getSubscriptions.rejected, (state) => {
         state.error = true;
         state.loading = false;
       })
       .addCase(
-        getMentors.fulfilled,
-        (state, action: PayloadAction<Mentor[]>) => {
+        getSubscriptions.fulfilled,
+        (state, action: PayloadAction<any>) => {
           state.mentors = action.payload;
           state.loading = false;
           state.error = false;
@@ -78,4 +78,4 @@ const mentorsSlice = createSlice({
   },
 });
 
-export default mentorsSlice.reducer;
+export default subscriptionSlice.reducer;

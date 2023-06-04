@@ -7,11 +7,6 @@ html {
 }
 
 
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   margin: 0;
   padding: 0;
@@ -76,6 +71,28 @@ textarea{
   font-size: 15px;
   line-height: 24px;
   color: #919399;
+}
+
+.ant-message-notice-content{
+  margin-top: 120px;
+  /* height: 100px; */
+}
+
+.ant-message-notice-content > span{
+  font-size: 20px !important;
+}
+
+.ant-message-custom-content > span {
+  font-size: 21px;
+  font-family: "Lato" , sans-serif;
+  /* color: green; */
+}
+
+.ant-btn {
+  font-size: 16px;
+  height: 38px;
+  font-family: "Lato" , sans-serif;
+  margin-top: 10px;
 }
 
 ::-webkit-scrollbar-track {

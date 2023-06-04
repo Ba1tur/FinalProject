@@ -8,15 +8,15 @@ $button-radius: 0.7rem;
 	width: 360px;
 	margin-top: 15px;
  }
+
  .error{
 	font-family: "Lato" , sans-serif;
 	display: flex;
 	color: red;
 	text-align: left;
-	// margin-top: 7px;
-	font-size: 16px;
+	margin-top: 7px;
+	font-size: 17px;
  }
-
 
  .btn {
 	background-color: $blue;
@@ -25,7 +25,7 @@ $button-radius: 0.7rem;
 	border: 1px solid $blue;
 	color: $white;
 	cursor: pointer;
-	margin-top: 20px;
+	margin-top: 30px;
 	font-size: 0.8rem;
 	font-weight: bold;
 	letter-spacing: 0.1rem;

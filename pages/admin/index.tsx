@@ -1,60 +1,145 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "./admin.module.scss";
-import { Avatar, List } from "antd";
-import { useSelector } from "react-redux";
-
-const data = [
-  {
-    title: "Alex",
-    email: "example@gmail.com",
-    jobTitle: "Ментор",
-    experience: "3 года",
-    education: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-  },
-  {
-    title: "Alex",
-    email: "example@gmail.com",
-    jobTitle: "Ментор",
-    experience: "3 года",
-    education: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-  },
-  {
-    title: "Alex",
-    email: "example@gmail.com",
-    jobTitle: "Ментор",
-    experience: "3 года",
-    education: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-  },
-  {
-    title: "Alex",
-    email: "example@gmail.com",
-    jobTitle: "Ментор",
-    experience: "3 года",
-    education: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-  },
-];
-
-const studentData = [
-  {
-    userName: 'Akyl',
-    email: 'example@gmail.com',
-  },
-  {
-    userName: 'Akyl',
-    email: 'example@gmail.com',
-  },
-  {
-    userName: 'Akyl',
-    email: 'example@gmail.com',
-  },
-  {
-    userName: 'Akyl',
-    email: 'example@gmail.com',
-  },
-]
+import { Avatar, Button, List } from "antd";
+import axios from "axios";
 
 const index: React.FC = () => {
-  const mentors = useSelector((state) => console.log(state));
+  const [mentors, setMentors] = useState<any>([]);
+  const [students, setStudents] = useState<any>([]);
+
+  useEffect(() => {
+    getMentors();
+    getStudents();
+  }, []);
+
+  const getMentors = async () => {
+    try {
+      let config = {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
+        },
+      };
+      await axios("https://localhost:7090/Admin/getAllMentors", config).then(
+        (res) => {
+          setMentors(res.data.mentors);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getStudents = async () => {
+    try {
+      let config = {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
+        },
+      };
+      await axios("https://localhost:7090/Admin/getAllStudents", config).then(
+        (res) => {
+          setStudents(res.data.students);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const confirmMentor = async (mentorId: number) => {
+    try {
+      let config = {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
+        },
+      };
+      const response = await axios.post(
+        "https://localhost:7090/Admin/confirmMentor",
+        { mentorId },
+        config
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteMentor = async (employeeId: number) => {
+    try {
+      let config = {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
+          "Content-Type": "application/json",
+        },
+      };
+      const requestBody = {
+        employeeId: employeeId,
+      };
+      const response = await axios.delete(
+        "https://localhost:7090/Admin/Delete-Mentor",
+        {
+          ...config,
+          data: JSON.stringify(requestBody),
+        }
+      );
+      getMentors();
+
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteStudent = async (studentId: number) => {
+    try {
+      let config = {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
+          "Content-Type": "application/json",
+        },
+      };
+
+      const requestBody = {
+        studentId: studentId,
+      };
+
+      const response = await axios.delete(
+        "https://localhost:7090/Admin/Delete-Student",
+        {
+          ...config,
+          data: JSON.stringify(requestBody),
+        }
+      );
+      getStudents();
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const promoteToAdmin = async (mentorId: number) => {
+    try {
+      let config = {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
+        },
+      };
+      const response = await axios.post(
+        "https://localhost:7090/Admin/promoteMentorToAdmin",
+        { mentorId },
+        config
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <section className={s.admin_section}>
@@ -62,74 +147,99 @@ const index: React.FC = () => {
         <h3>Все менторы</h3>
         <List
           itemLayout="horizontal"
-          dataSource={data}
-          renderItem={(item, index) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={
-                  <Avatar
-                    size={60}
-                    src={`https://play-lh.googleusercontent.com/a/AItbvmnsjJkulsJJdEd95vyYEmMZTn7WJzmAEfc_DE0e=mo`}
-                  />
-                }
-                title={
-                  <div>
-                    <div className={s.list_block}>
-                      <h6>Имя : </h6>
-                      <h5>{item.title}</h5>
+          dataSource={mentors}
+          renderItem={(item) => {
+            const { id, userName, email, jobTitle, experience, education } =
+              item;
+            return (
+              <List.Item key={id}>
+                <List.Item.Meta
+                  avatar={
+                    <Avatar
+                      size={60}
+                      src={`https://play-lh.googleusercontent.com/a/AItbvmnsjJkulsJJdEd95vyYEmMZTn7WJzmAEfc_DE0e=mo`}
+                    />
+                  }
+                  title={
+                    <div>
+                      <div className={s.list_block}>
+                        <h6>Имя : </h6>
+                        <h5>{userName}</h5>
+                      </div>
+                      <div className={s.list_block}>
+                        <h6>Email : </h6>
+                        <h5>{email}</h5>
+                      </div>
+                      <div className={s.list_block}>
+                        <h6>Работа : </h6>
+                        <h5>{jobTitle}</h5>
+                      </div>
+                      <div className={s.list_block}>
+                        <h6>Опыт : </h6>
+                        <h5>{experience}</h5>
+                      </div>
+                      <div className={s.list_block}>
+                        <h6>Образование:</h6>
+                        <h5>{education}</h5>
+                      </div>
+                      <div className={s.list_block}>
+                        <Button onClick={() => confirmMentor(item.id)}>
+                          Подвердить ментора
+                        </Button>
+                        <Button onClick={() => deleteMentor(item.id)} danger>
+                          Удалить ментора
+                        </Button>
+                      </div>
+                      <div className={s.list_block}>
+                        <Button danger onClick={() => promoteToAdmin(item.id)}>
+                          Сделать Админом
+                        </Button>
+                      </div>
                     </div>
-                    <div className={s.list_block}>
-                      <h6>Email : </h6>
-                      <h5>{item.email}</h5>
-                    </div>
-                    <div className={s.list_block}>
-                      <h6>Работа : </h6>
-                      <h5>{item.jobTitle}</h5>
-                    </div>
-                    <div className={s.list_block}>
-                      <h6>Опыт : </h6>
-                      <h5>{item.experience}</h5>
-                    </div>
-                    <div className={s.list_block}>
-                      <h6>Образование:</h6>
-                      <h5>{item.education}</h5>
-                    </div>
-                  </div>
-                }
-              />
-            </List.Item>
-          )}
+                  }
+                />
+              </List.Item>
+            );
+          }}
         />
       </div>
       <div className={s.admin_section_students}>
         <h3>Все Студенты</h3>
         <List
           itemLayout="horizontal"
-          dataSource={studentData}
-          renderItem={(item, index) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={
-                  <Avatar
-                    size={60}
-                    src={`https://play-lh.googleusercontent.com/a/AItbvmnsjJkulsJJdEd95vyYEmMZTn7WJzmAEfc_DE0e=mo`}
-                  />
-                }
-                title={
-                  <div>
-                    <div className={s.list_block}>
-                      <h6>Имя : </h6>
-                      <h5>{item.userName}</h5>
+          dataSource={students}
+          renderItem={(item) => {
+            const { id, userName, email } = item;
+            return (
+              <List.Item key={id}>
+                <List.Item.Meta
+                  avatar={
+                    <Avatar
+                      size={60}
+                      src={`https://indico.un.org/event/1000996/registrations/8406/874232/avatar`}
+                    />
+                  }
+                  title={
+                    <div>
+                      <div className={s.list_block}>
+                        <h6>Имя : </h6>
+                        <h5>{userName}</h5>
+                      </div>
+                      <div className={s.list_block}>
+                        <h6>Email : </h6>
+                        <h5>{email}</h5>
+                      </div>
+                      <div className={s.list_block}>
+                        <Button onClick={() => deleteStudent(item.id)} danger>
+                          Удалить студента
+                        </Button>
+                      </div>
                     </div>
-                    <div className={s.list_block}>
-                      <h6>Email : </h6>
-                      <h5>{item.email}</h5>
-                    </div>
-                  </div>
-                }
-              />
-            </List.Item>
-          )}
+                  }
+                />
+              </List.Item>
+            );
+          }}
         />
       </div>
     </section>
