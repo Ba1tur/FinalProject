@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from "react";
 import s from "./admin.module.scss";
-import { Avatar, Button, List } from "antd";
+import { Avatar, Button, List, message } from "antd";
 import axios from "axios";
 
-const index: React.FC = () => {
-  const [mentors, setMentors] = useState<any>([]);
-  const [students, setStudents] = useState<any>([]);
+interface Mentor {
+  id: number;
+  userName: string;
+  email: string;
+  jobTitle: string;
+  experience: string;
+  education: string;
+}
+
+interface Student {
+  id: number;
+  userName: string;
+  email: string;
+}
+
+const Index: React.FC = () => {
+  const [mentors, setMentors] = useState<Mentor[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
 
   useEffect(() => {
     getMentors();
@@ -20,11 +35,11 @@ const index: React.FC = () => {
             "Bearer " + JSON.parse(localStorage.getItem("token") as string),
         },
       };
-      await axios("https://localhost:7090/Admin/getAllMentors", config).then(
-        (res) => {
-          setMentors(res.data.mentors);
-        }
+      const res = await axios.get(
+        "https://localhost:7090/Admin/getAllMentors",
+        config
       );
+      setMentors(res.data.mentors);
     } catch (err) {
       console.log(err);
     }
@@ -38,11 +53,11 @@ const index: React.FC = () => {
             "Bearer " + JSON.parse(localStorage.getItem("token") as string),
         },
       };
-      await axios("https://localhost:7090/Admin/getAllStudents", config).then(
-        (res) => {
-          setStudents(res.data.students);
-        }
+      const res = await axios.get(
+        "https://localhost:7090/Admin/getAllStudents",
+        config
       );
+      setStudents(res.data.students);
     } catch (err) {
       console.log(err);
     }
@@ -66,6 +81,27 @@ const index: React.FC = () => {
       console.error(error);
     }
   };
+
+  const promoteToAdmin = async (mentorId: number) => {
+    try {
+      let config = {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
+        },
+      };
+      const response = await axios.post(
+        "https://localhost:7090/Admin/promoteMentorToAdmin",
+        { mentorId },
+        config
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const deleteMentor = async (employeeId: number) => {
     try {
@@ -122,29 +158,37 @@ const index: React.FC = () => {
     }
   };
 
-  const promoteToAdmin = async (mentorId: number) => {
-    try {
-      let config = {
-        headers: {
-          Authorization:
-            "Bearer " + JSON.parse(localStorage.getItem("token") as string),
-        },
-      };
-      const response = await axios.post(
-        "https://localhost:7090/Admin/promoteMentorToAdmin",
-        { mentorId },
-        config
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+  // const deleteMentor = (mentorId: number) => {
+  //   // Delete a mentor
+  //   const updatedMentors = mentors.filter((mentor) => mentor.id !== mentorId);
+  //   setMentors(updatedMentors);
+  //   showMessage("success", "Успешно удалили ментора");
+  //   console.log("Deleting mentor with ID:", mentorId);
+  // };
+
+  // const deleteStudent = (studentId: number) => {
+  //   // Delete a student
+  //   const updatedStudents = students.filter(
+  //     (student) => student.id !== studentId
+  //   );
+  //   setStudents(updatedStudents);
+  //   showMessage("success", "Успешно удалили студента");
+  //   console.log("Deleting student with ID:", studentId);
+  // };
+
+  const showMessage = (type: any, content: string) => {
+    messageApi.open({
+      type: type,
+      content: content,
+      duration: 10,
+    });
   };
 
   return (
     <section className={s.admin_section}>
       <div className={s.admin_section_mentors}>
         <h3>Все менторы</h3>
+        {contextHolder}
         <List
           itemLayout="horizontal"
           dataSource={mentors}
@@ -246,4 +290,4 @@ const index: React.FC = () => {
   );
 };
 
-export default index;
+export default Index;

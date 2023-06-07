@@ -139,7 +139,7 @@ const Subscriptions = () => {
                     className={s.subscriptions_section__block__img}
                     width={320}
                     height={150}
-                    src={reactLogo}
+                    src='/jsPhoto.jpg'
                     alt="react_logo"
                   />
                   <Image

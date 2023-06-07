@@ -11,9 +11,16 @@ import playBtn from "../../public/play.svg";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const Lessons = () => {
+interface Lesson {
+  id: number;
+  title: string;
+  description: string;
+  imageCourseUrl: string;
+}
 
-  const [lessons , setLessons] = useState([])
+const Lessons: React.FC = () => {
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [user, setUser] = useState<any>();
 
   useEffect(() => {
     let config = {
@@ -23,20 +30,14 @@ const Lessons = () => {
       },
     };
     axios
-      .get("https://localhost:7090/Course/getAllCourses" , config)
+      .get("https://localhost:7090/Course/getAllCourses", config)
       .then((res) => {
-        setLessons(res.data.courses.courses)
-        // console.log(res);
+        setLessons(res.data.courses.courses);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  console.log(lessons);
-
-
-  const [user, setUser] = useState<any>();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -47,9 +48,7 @@ const Lessons = () => {
     }
   }, []);
 
-
-
-  const subscription = async (studentId: number , courseId: number) => {
+  const subscription = async (studentId: number, courseId: number) => {
     try {
       let config = {
         headers: {
@@ -59,7 +58,7 @@ const Lessons = () => {
       };
       const response = await axios.post(
         "https://localhost:7090/Subscribtion/addSubscribtion",
-        { studentId , courseId },
+        { studentId, courseId },
         config
       );
       console.log(response.data);
@@ -67,9 +66,8 @@ const Lessons = () => {
       console.error(error);
     }
   };
-  
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <main className={s.main_section}>
@@ -82,34 +80,35 @@ const Lessons = () => {
           Все Курсы
         </motion.h1>
         <div className={s.main_section__block__about}>
-          {lessons.length < 0 ? <h1>Нету уроков</h1> : lessons.map((item) => {
-            console.log(item.imageCourseUrl)
-            return (
-              <Card
-                onClick={() => router.push(`/videoPage/${item.id}`)}
-                key={item.id}
-                className={s.main_section__block__box}
-              >
-                <img
-                  className={s.main_section__block__img}
-                  // width={320}
-                  // height={150}
-                  src={item.imageCourseUrl} 
-                  // src='/reactpng'
-                  alt="react_logo"
-                />
-                {/* <p>{item.imageCourseUrl}</p> */}
-                {/* <Image
-                  className={s.main_section__block__play_btn}
-                  src={playBtn}
-                  alt="play_btn"
-                /> */}
-                {/* <p>{item.title}</p> */}
-                {/* <p>{item.description}</p> */}
-                {/* <Button onClick={() => subscription(user.id , item.id)} >Подписаться</Button> */}
-              </Card>
-            );
-          })}
+          {lessons.length === 0 ? (
+            <h1>Нету уроков</h1>
+          ) : (
+            lessons.map((item) => {
+              return (
+                <Card
+                  onClick={() => router.push(`/videoPage/${item.id}`)}
+                  key={item.id}
+                  className={s.main_section__block__box}
+                >
+                  <img
+                    className={s.main_section__block__img}
+                    src={item.imageCourseUrl}
+                    alt="course_image"
+                  />
+                  <Image
+                    className={s.main_section__block__play_btn}
+                    src={playBtn}
+                    alt="play_btn"
+                  />
+                  <p>{item.title}</p>
+                  <p>{item.description}</p>
+                  <Button onClick={() => subscription(user.id, item.id)}>
+                    Подписаться
+                  </Button>
+                </Card>
+              );
+            })
+          )}
         </div>
       </div>
     </main>

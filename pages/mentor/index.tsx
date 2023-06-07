@@ -37,7 +37,7 @@ const Mentor: React.FC = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const showMessage = (type: any, content: string) => {
+  const showMessage = (type: "success" | "error", content: string) => {
     messageApi.open({
       type: type,
       content: content,
@@ -53,10 +53,10 @@ const Mentor: React.FC = () => {
   }, [user]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, files } = e.target;
-
-    if (name === "formFile" && files && files.length > 0) {
-      const file = files[0];
+    const { name, value } = e.target;
+  
+    if (name === "formFile" && e.target instanceof HTMLInputElement && e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
       setCourseData((prevData) => ({
         ...prevData,
         formFile: URL.createObjectURL(file),
@@ -68,7 +68,7 @@ const Mentor: React.FC = () => {
       }));
     }
   };
-
+  
   const handleCreateCourse = async () => {
     try {
       const formData = new FormData();
@@ -90,7 +90,7 @@ const Mentor: React.FC = () => {
         headers: {
           Authorization:
             "Bearer " + JSON.parse(localStorage.getItem("token") as string),
-          "Content-Type": "multipart/form-data",
+           "Content-Type": "multipart/form-data",
         },
       };
 
@@ -122,9 +122,8 @@ const Mentor: React.FC = () => {
           accept="image/png, image/jpeg"
           onChange={handleInputChange}
         />
-        {typeof courseData.formFile === "string" && (
-          <img src={courseData.formFile} alt="Selected file" />
-        )}
+       
+        {contextHolder}
         <MyInput
           placeholder="Название"
           name="title"

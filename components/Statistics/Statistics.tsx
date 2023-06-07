@@ -2,17 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import s from "./Statistics.module.scss";
 
 const Statistics = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null); // Use HTMLElement type for the ref
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const { innerHeight, pageYOffset } = window;
 
-      if (
-        ref.current &&
-        ref.current.offsetTop <= innerHeight + pageYOffset - 50
-      ) {
+      if (ref.current && ref.current.offsetTop <= innerHeight + pageYOffset - 50) {
         setInView(true);
       } else {
         setInView(false);
@@ -51,8 +48,7 @@ const Statistics = () => {
               <p>%</p>
             </div>
             <h3>
-              Студентов, занимающихся онлайн, находятся в возрасте от 18 до 34
-              лет.
+              Студентов, занимающихся онлайн, находятся в возрасте от 18 до 34 лет.
             </h3>
           </div>
         </div>
