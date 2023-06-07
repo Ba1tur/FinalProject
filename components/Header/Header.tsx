@@ -3,11 +3,16 @@ import s from "./Header.module.scss";
 import logo from "../../public/logo.png";
 import language from "../../public/language.svg";
 import Image from "next/image";
-import { Button, Dropdown, MenuProps, Tooltip } from "antd";
+import { Button, Dropdown, MenuProps, Modal, Tooltip } from "antd";
 import MyBtn from "../MyBtn/MyBtn";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import NavBar from "../NavBar/NavBar";
+import MyInput from "../MyInput/MyInput";
+import TeacherResetPassword from "../TeacherResetPassword/TeacherResetPassword";
+import StudentResetPassword from "../StudentResetPassword/StudentResetPassword";
+import TeacherUpdate from "../StudentUpdate/TeacherUpdate";
 
 interface headerDowns {
   position: string;
@@ -79,10 +84,9 @@ const Header = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const { pathname } = useRouter();
-
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [modal2Open, setModal2Open] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -129,22 +133,33 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("token")
-    location.reload();
+    localStorage.removeItem("token");
     router.push("/");
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
   };
 
   const items: MenuProps["items"] = [
     {
       key: "1",
       label: (
-        <div>
+        <div className={s.user_block}>
           {user && user.userName && (
             <h4 className={s.profile_name}>Имя: {user.userName}</h4>
           )}
+          {user && user.roleId === 2 ? (
+            <>
+              <TeacherResetPassword />
+              <TeacherUpdate />
+            </>
+          ) : (
+            <StudentResetPassword />
+          )}
+
           <Button
             onClick={handleLogout}
-            style={{ width: "130px", marginTop: "20px" }}
+            style={{ width: "130px", marginTop: "10px" }}
             icon={<LogoutOutlined />}
           >
             Выйти
@@ -162,28 +177,7 @@ const Header = () => {
             <Image className={s.header__nav_logo} src={logo} alt="logo_img" />
             <h1>It-Academy</h1>
           </Link>
-          {item ? (
-            <div style={{ display: "flex" }}>
-              <Link href="/lessons">
-                <h2
-                  className={pathname === "/lessons" ? s.link_active : s.link}
-                >
-                  Все уроки
-                </h2>
-              </Link>
-              <Link href="/subscriptions">
-                <h3
-                  className={
-                    pathname === "/subscriptions" ? s.link_active : s.link
-                  }
-                >
-                  Мои подписки
-                </h3>
-              </Link>
-            </div>
-          ) : (
-            ""
-          )}
+          {item ? <NavBar /> : ""}
         </div>
         <div className={s.header__nav__block}>
           <input
@@ -200,10 +194,7 @@ const Header = () => {
             </Dropdown>
           ) : (
             <Link href="/form">
-              <Button
-                type="primary"
-                style={{ width: "200px", height: "45px" }}
-              >
+              <Button type="primary" style={{ width: "200px", height: "45px" }}>
                 Вход и регистрация
               </Button>
             </Link>

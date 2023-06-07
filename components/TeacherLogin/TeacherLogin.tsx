@@ -34,14 +34,19 @@ const TeacherLogin = () => {
       );
       localStorage.setItem("user", JSON.stringify(response.data));
       localStorage.setItem("token", JSON.stringify(response.data.jwtToken));
-      console.log(response.data);
-      setTimeout(() => {
+      console.log(response.data.message);
+      if (response.data.message === "Unauthorized"){
+        showMessage("error", "Неправильно велли пароль или email");
+      }else if (response.data.message === "Authorized") {
+         setTimeout(() => {
         router.push("/");
         setTimeout(() => {
           location.reload()
         }, 100)
       }, 4000);
       showMessage("success", "Успешно зашли свой аккаунт");
+      }
+     
     } catch (error) {
       console.error(error);
       showMessage("error", "Нерпавильно велли email либо пароль");

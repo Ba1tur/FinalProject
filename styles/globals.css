@@ -19,6 +19,12 @@ body{
   transition: background-color 200ms linear;
 }
 
+
+.ant-dropdown{
+  /* margin-bottom: 100px !important; */
+  top: 70px !important;
+}
+
 ol, ul {
   list-style: none;
 }

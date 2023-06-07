@@ -12,12 +12,12 @@ type Props = {
 
 const Layouts = ({ children }: Props) => {
 
-  const dispatch: ThunkDispatch<{}, void, any>  = useDispatch()
+  // const dispatch: ThunkDispatch<{}, void, any>  = useDispatch()
   
 
-  useEffect(() => {
-    dispatch(getMentors())
-  },[])
+  // useEffect(() => {
+    // dispatch(getMentors())
+  // },[])
   
   return (
     <>

@@ -43,11 +43,14 @@
         transition: opacity 0.3s ease-out, transform 0.3s ease-out;
       }
       p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         font-family: "Lato";
         font-style: normal;
         font-weight: 550;
         font-size: 18px;
-        line-height: 120%;
+        line-height: 130%;
         padding: 0 2% 0 2%;
         color: #2c2d2e;
       }
